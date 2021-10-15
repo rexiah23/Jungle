@@ -4,9 +4,27 @@
     <h1>Order #<%= @order.id %></h1>
   </header>
 
+
   <div class="order-summary jumbotron">
     <h4>Thank you for your order!</h4>
+    <table>
+      <ol>
+      <% @order.line_items.each do |item| %>
+        <li>
+          <tr><td><p>Name: <%= item.product.name %></p></td></tr>
+          <tr><td><p><%= image_tag item.product.image.tiny %></p></td></tr>
+          <tr><td><p><%= item.product.description %></p></td></tr>
+          <tr><td><p>Quantity: <%= item.quantity %></p></td></tr>
+          <tr><td><p>Line Item Cost: <%=  humanized_money_with_symbol item.total_price_cents / 100.0 %></p></td></tr>
+        </li>
+      <% end %>
+      </ol>
+      </table>
+      <h3> Final Amount: <%= humanized_money_with_symbol @order.total_cents / 100.0%></h3> 
+      <h4> Email: <%= @order.email %> </h4>
   </div>
+
+
 
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
