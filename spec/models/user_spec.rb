@@ -5,13 +5,29 @@ RSpec.describe User, type: :model do
 describe 'Validations' do
   # validation tests/examples here
   before do 
-    @password = User.new(:name => "Shirts")
-    @password_confirmation = User.new(:name => "Men's shirts", :price_cents => 5000, :quantity => 2, :category => @category)
+    @new_user = User.new(name: "rexiah_23", email: 'lewis123@gmail.com', password: "123", password_confirmation: "123", first_name: 'Lewis', last_name: 'Lee')
   end 
 
-  it "it must have a name to be valid" do 
-    @product.name = nil; 
-    @product.save
-    expect(@product.errors.full_messages).to include "Name can't be blank"
+  it "invalid when password and password_confirmation fields don't match" do 
+    @new_user.password = 'abc'
+    expect(@new_user.valid?).to eq(false)
+  end 
+
+  it "invalid when either password and password_confirmation fields are empty" do 
+    @new_user.password = nil; 
+    expect(@new_user.valid?).to eq(false)
+  end 
+
+  it "invalid when email is already in database during sign up" do 
+    @new_user.save
+    before_count = User.count
+    @duplicate_user = User.new(name: "fredlee_23", email: 'lewis123@gmail.com', password: "123", password_confirmation: "123", first_name: 'Fred', last_name: 'Lee')
+    @duplicate_user.save
+    expect(User.count).to eq(before_count)
+  end 
+
+  it "invalid when either email, first name, and last name fields are empty" do 
+    @new_user.email = nil; 
+    expect(@new_user.valid?).to eq(false)
   end 
 end
