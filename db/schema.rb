@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20211018160702) do
-=======
 ActiveRecord::Schema.define(version: 20211018184414) do
->>>>>>> feature/user-auth
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -60,8 +56,6 @@ ActiveRecord::Schema.define(version: 20211018184414) do
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
-<<<<<<< HEAD
-=======
   create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "email"
@@ -70,7 +64,6 @@ ActiveRecord::Schema.define(version: 20211018184414) do
     t.datetime "updated_at",      null: false
   end
 
->>>>>>> feature/user-auth
   create_table "widgets", force: :cascade do |t|
     t.string   "g"
     t.string   "is"
