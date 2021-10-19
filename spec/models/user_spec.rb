@@ -56,7 +56,12 @@ RSpec.describe User, type: :model do
     end 
 
     it "authenticates user when correct password and email are entered" do 
-      user = User.authenticate_with_credentials('lewis123@gmail.com', '123456')
+      user = User.authenticate_with_credentials('lewis123@gmail.com ', '123456')
+      expect(user).to eq(@new_user)
+    end
+
+    it "authenticates user when correct password and lower and upper cased email with whitespaces are entered" do 
+      user = User.authenticate_with_credentials('  lEwiS123@gmail.com ', '123456')
       expect(user).to eq(@new_user)
     end
   end
