@@ -68,4 +68,6 @@ group :test do
   gem 'capybara'
   gem 'poltergeist'
   gem 'database_cleaner'
+  gem 'webdrivers', '~> 3.2'
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
 end
